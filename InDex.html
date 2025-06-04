@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BinaGame</title>
+  <title>binaGame</title>
   <style>
     body {
       background: #111;
@@ -41,6 +41,7 @@
       padding: 6px 16px;
       margin: 6px;
       font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -48,8 +49,8 @@
   <h1>🕹️ binaGame!</h1>
 
   <div>
-    <button onclick="applyBinary()">🔁 Update</button>
-    <button onclick="togglePause()" id="pauseBtn">⏸️ Pause</button>
+    <button id="updateRamBtn">🔁 Update</button>
+    <button id="pauseBtn">⏸️ Pause</button>
   </div>
 
   <div class="screen-container">
@@ -75,6 +76,7 @@
     const jsEditor = document.getElementById("jsEditor");
     const binaryEditor = document.getElementById("binaryEditor");
     const pauseBtn = document.getElementById("pauseBtn");
+    const updateRamBtn = document.getElementById("updateRamBtn");
 
     let paused = false;
 
@@ -166,6 +168,15 @@
     screen.addEventListener('mousedown', e => {
       const pixel = getPixelFromEvent(e);
       onPixelClicked(pixel.x, pixel.y);
+    });
+
+    updateRamBtn.addEventListener("click", () => {
+      applyBinary();
+      drawScreen();
+    });
+
+    pauseBtn.addEventListener("click", () => {
+      togglePause();
     });
 
     function loop() {
